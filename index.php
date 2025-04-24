@@ -177,7 +177,7 @@ session_start();
                 <div class="fare-content">
                     <div class="fly-from">Fly from</div>
                     <div class="destination">Lusaka to Livingstone</div>
-                    <div class="price">K1,130</div>
+                    <div class="price">K4,530</div>
                     <button class="book-now-btn">BOOK NOW</button>
                 </div>
             </div>
@@ -187,7 +187,7 @@ session_start();
                 <div class="fare-content">
                     <div class="fly-from">Fly from</div>
                     <div class="destination">Ndola to Lusaka</div>
-                    <div class="price">K1,054</div>
+                    <div class="price">K3,054</div>
                     <button class="book-now-btn">BOOK NOW</button>
                 </div>
             </div>
@@ -197,27 +197,27 @@ session_start();
                 <div class="fare-content">
                     <div class="fly-from">Fly from</div>
                     <div class="destination">Harare to Lusaka</div>
-                    <div class="price">K1,115</div>
+                    <div class="price">K5,560</div>
                     <button class="book-now-btn">BOOK NOW</button>
                 </div>
             </div>
 
             <div class="fare-card">
-                <img src="images/4.jpg" alt="Johannesburg">
+                <img src="images/image-29.png" alt="Johannesburg">
                 <div class="fare-content">
                     <div class="fly-from">Fly from</div>
                     <div class="destination">Lusaka to Johannesburg</div>
-                    <div class="price">K2,499</div>
+                    <div class="price">K6,005</div>
                     <button class="book-now-btn">BOOK NOW</button>
                 </div>
             </div>
 
             <div class="fare-card">
-                <img src="images/5.jpeg" alt="Nairobi">
+                <img src="images/image-30.jpg" alt="Nairobi">
                 <div class="fare-content">
                     <div class="fly-from">Fly from</div>
                     <div class="destination">Lusaka to Nairobi</div>
-                    <div class="price">K3,990</div>
+                    <div class="price">K7,000</div>
                     <button class="book-now-btn">BOOK NOW</button>
                 </div>
             </div>
@@ -227,7 +227,7 @@ session_start();
                 <div class="fare-content">
                     <div class="fly-from">Fly from</div>
                     <div class="destination">Lusaka to Dubai</div>
-                    <div class="price">K17,100</div>
+                    <div class="price">K16,100</div>
                     <button class="book-now-btn">BOOK NOW</button>
                 </div>
             </div>
@@ -237,17 +237,25 @@ session_start();
     <section id="home" class="content-overlay">
         <h2>Airport Experience, feel at home</h2>
 
-
-        <video src="/video/airline-video.mp4"> </video>
-        
+    <div class="flex-container">
        <div class="video-container">
             <video autoplay muted loop controls class="hero-video">
-                <source src="video/airline-video.mp4.mp4" type="video/mp4">
-                
+                <source src="video/airline-video2.mp4" type="video/mp4">
             </video>
         </div>
+        <div class="airline-services-description">
+            <p>
+                At Cav Airlines, we pride ourselves on offering exceptional services to make your journey unforgettable. 
+                From comfortable seating and in-flight entertainment to gourmet meals and world-class customer service, 
+                we ensure every detail is tailored to your needs. Whether you're traveling for business or leisure, 
+                our premium flight options, hotel partnerships, and car rental services provide a seamless travel experience.
+                Enjoy the convenience of online booking, flexible ticket options, and 24/7 customer support to assist you at every step. 
+                Our loyalty program rewards frequent travelers with exclusive benefits, including priority boarding, lounge access, and discounted fares. 
+                With Cav Airlines, your comfort, safety, and satisfaction are our top priorities, ensuring you arrive at your destination refreshed and ready.
+            </p>
+        </div>
+      </div>  
 
-    
         <section class="methods of payment">
             <h2>Payment Options</h2>
             <div class="payment-container">

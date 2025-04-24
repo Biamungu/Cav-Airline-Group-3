@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       margin: 0;
     }
     .form-container {
-      background: white;
+      background: #fff;
       padding: 25px 30px;
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     h2 {
       text-align: center;
-      color: #007bff;
+      color: #FFD700;
       margin-bottom: 20px;
     }
     .message {
@@ -110,14 +110,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       font-size: 16px;
     }
     input:focus {
-      border-color: #007bff;
+      border-color: #FFD700;
       outline: none;
       box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
     }
     button {
       margin-top: 20px;
       padding: 12px;
-      background-color: #007bff;
+      background-color: #FFD700;
       color: white;
       border: none;
       border-radius: 5px;
