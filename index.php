@@ -3,6 +3,7 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@ session_start();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header>
         <div class="logo_div">
@@ -22,7 +24,7 @@ session_start();
                 </label>
             </div>
         </div>
-         
+
         <nav class="Navbar_top" id="navBar">
             <div class="dropdown">
                 <a href="index.php" class="dropbtn">Home</a>
@@ -41,29 +43,32 @@ session_start();
                 <a href="#map" class="dropbtn">Map</a>
                 <div class="dropdown-content">
                     <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63820.97889999999!2d28.322352!3d-15.387525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1940f5a7b5f5f5f5%3A0x5f5f5f5f5f5f5f5f!2sLusaka%2C%20Zambia!5e0!3m2!1sen!2szm!4v1633024000000!5m2!1sen!2szm" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63820.97889999999!2d28.322352!3d-15.387525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1940f5a7b5f5f5f5%3A0x5f5f5f5f5f5f5f5f!2sLusaka%2C%20Zambia!5e0!3m2!1sen!2szm!4v1633024000000!5m2!1sen!2szm"
+                            allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
             </div>
             <div class="dropdown">
                 <a href="Support.php" class="dropbtn">Help</a>
             </div>
-            
+
             <!-- This is the only login/logout section you need -->
             <div class="button_log">
-    <?php if (isset($_SESSION['user_id'])): ?>
-        <a href="dashboard.php">Dashboard</a>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <a href="dashboard.php">Dashboard</a>
 
-        <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
-            <a href="admin-panel.php" class="admin-link">Admin Panel</a>
-        <?php endif; ?>
+                    <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+                        <a href="admin-panel.php" class="admin-link">Admin Panel</a>
+                    <?php endif; ?>
 
-        <a href="logout.php" class="logout-btn">Log Out (<?php echo htmlspecialchars($_SESSION['username']); ?>)</a>
-    <?php else: ?>
-        <button class="button_l"><a href="login.php">Login</a></button>
-        <button class="button_l"><a href="create-account.php">Create Account</a></button>
-    <?php endif; ?>
-</div>
+                    <a href="logout.php" class="logout-btn">Log Out
+                        (<?php echo htmlspecialchars($_SESSION['username']); ?>)</a>
+                <?php else: ?>
+                    <button class="button_l"><a href="login.php">Login</a></button>
+                    <button class="button_l"><a href="create-account.php">Create Account</a></button>
+                <?php endif; ?>
+            </div>
 
 
             <div class="search-container">
@@ -76,83 +81,83 @@ session_start();
         </nav>
     </header>
 
-    
-    
 
 
-    
+
+
+
     <section class="hero-section">
 
         <h1 class="hero-text">Experience <span>Africa</span> <span class="text-black">to</span> <span>Europe</span></h1>
-        
+
         <div class="booking-bar">
             <div class="booking-options">
                 <div class="booking-option active">FLIGHT</div>
                 <div class="booking-option">HOTEL</div>
                 <div class="booking-option">CAR</div>
             </div>
-            
-            <form class="booking-form" method="POST" action="">
-        <div class="form-group">
-            <label>From</label>
-            <select name="from" required>
-                <option value="Lusaka, Zambia">Lusaka, Zambia</option>
-                <option value="Ndola, Zambia">Ndola, Zambia</option>
-                <option value="Livingstone, Zambia">Livingstone, Zambia</option>
-            </select>
-        </div>
 
-        <div class="form-group">
-            <label>To</label>
-            <select name="to" required>
-                <option value="Harare, Zimbabwe">Harare, Zimbabwe</option>
-                <option value="Johannesburg, South Africa">Johannesburg, South Africa</option>
-                <option value="Nairobi, Kenya">Nairobi, Kenya</option>
-            </select>
-        </div>
+            <form class="booking-form" method="POST" action="book_process.php">
+                <div class="form-group">
+                    <label>From</label>
+                    <select name="from" required>
+                        <option value="Lusaka, Zambia">Lusaka, Zambia</option>
+                        <option value="Ndola, Zambia">Ndola, Zambia</option>
+                        <option value="Livingstone, Zambia">Livingstone, Zambia</option>
+                    </select>
+                </div>
 
-        <div class="form-group">
-            <label>Depart</label>
-            <input type="date" name="depart" required>
-        </div>
+                <div class="form-group">
+                    <label>To</label>
+                    <select name="to" required>
+                        <option value="Harare, Zimbabwe">Harare, Zimbabwe</option>
+                        <option value="Johannesburg, South Africa">Johannesburg, South Africa</option>
+                        <option value="Nairobi, Kenya">Nairobi, Kenya</option>
+                    </select>
+                </div>
 
-        <div class="form-group">
-            <label>Return</label>
-            <input type="date" name="return">
-        </div>
+                <div class="form-group">
+                    <label>Depart</label>
+                    <input type="date" name="depart" required>
+                </div>
 
-        <div class="form-group">
-            <label>Adult</label>
-            <select name="adult">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select>
-        </div>
+                <div class="form-group">
+                    <label>Return</label>
+                    <input type="date" name="return">
+                </div>
 
-        <div class="form-group">
-            <label>Child</label>
-            <select name="child">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select>
-        </div>
+                <div class="form-group">
+                    <label>Adult</label>
+                    <select name="adult">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
 
-        <div class="form-group">
-            <label>Infant</label>
-            <select name="infant">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-            </select>
-        </div>
+                <div class="form-group">
+                    <label>Child</label>
+                    <select name="child">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
 
-        <button type="submit" class="search-btn">Submit</button>
-    </form>
-            
+                <div class="form-group">
+                    <label>Infant</label>
+                    <select name="infant">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="search-btn">Submit</button>
+            </form>
+
             <div class="booking-extras">
                 <label>
                     <input type="checkbox"> Return
@@ -168,7 +173,7 @@ session_start();
         </div>
     </section>
 
-    
+
     <section class="great-value-fares">
         <h2>Great Value Fares</h2>
         <div class="fares-grid">
@@ -239,15 +244,15 @@ session_start();
 
 
         <video src="/video/airline-video.mp4"> </video>
-        
-       <div class="video-container">
+
+        <div class="video-container">
             <video autoplay muted loop controls class="hero-video">
                 <source src="video/airline-video.mp4.mp4" type="video/mp4">
-                
+
             </video>
         </div>
 
-    
+
         <section class="methods of payment">
             <h2>Payment Options</h2>
             <div class="payment-container">
@@ -278,15 +283,15 @@ session_start();
                 </div>
             </div>
             <div class="payment-info">
-            
-                </div>
+
+            </div>
             </div>
         </section>
 
-    
+
         <section id="hotels" class="service-section">
             <h2>Our Premium Hotels</h2>
-            
+
             <div class="dining-options">
                 <div class="dining-card standard-room">
                     <div class="dining-content">
@@ -328,7 +333,7 @@ session_start();
             </div>
         </section>
 
-    
+
         <section id="flights" class="service-section">
             <h2>Flight Classes</h2>
             <div class="flight-classes">
@@ -358,7 +363,7 @@ session_start();
             </div>
         </section>
 
-    
+
         <section id="cars" class="service-section">
             <h2>Car Services</h2>
             <div class="car-services">
@@ -388,29 +393,32 @@ session_start();
             </div>
         </section>
 
-    
+
         <section class="app-download">
             <div class="app-content">
                 <h2>Download our mobile app for easy access</h2>
                 <div class="app-buttons">
                     <a href="#" class="app-store">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on App Store">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg"
+                            alt="Download on App Store">
                     </a>
                     <a href="#" class="play-store">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+                            alt="Get it on Google Play">
                     </a>
                 </div>
             </div>
             <div class="app-preview">
                 <div class="phone-mockup">
                     <div class="phone-screen">
-                        <img src="https://placehold.co/300x600/2c3e50/FFF/png?text=Cav+Grey+App" alt="Mobile App Preview">
+                        <img src="https://placehold.co/300x600/2c3e50/FFF/png?text=Cav+Grey+App"
+                            alt="Mobile App Preview">
                     </div>
                 </div>
             </div>
         </section>
 
-        
+
         <div class="social-media">
             <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
             <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -418,7 +426,7 @@ session_start();
         </div>
     </section>
 
-    
+
     <section class="footer-info">
         <div class="info-columns">
             <div class="info-column">
@@ -427,7 +435,7 @@ session_start();
                     <li><a href="#flight">Flight</a></li>
                     <li><a href="#hotel">Hotel</a></li>
                     <li><a href="#car">Car</a></li>
-                    
+
                 </ul>
             </div>
 
@@ -488,7 +496,7 @@ session_start();
         </div>
     </section>
 
-    
+
     <div id="chatbot-container" class="chatbot-container">
         <div class="chatbot-header">
             <h3>Chat Support</h3>
@@ -530,7 +538,7 @@ session_start();
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="flight-class">
                     <h3>Business Class</h3>
                     <div class="flight-times">
@@ -551,7 +559,7 @@ session_start();
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="flight-class">
                     <h3>First Class</h3>
                     <div class="flight-times">
@@ -579,27 +587,27 @@ session_start();
     <footer>
         <p>&copy; 2025 Cav Airlines, @Harare along magamba way 5ive Ave. All rights reserved.</p>
         <p>Contact: <a href="mailto:mandeyatendai@gmail.com">mandeyatendai@gmail.com</a> | Phone: +260972109894</p>
-        
+
         <div class="chatbot-icon">
             <i class="fas fa-comments"></i>
         </div>
     </footer>
 
-    
+
     <script>
-        
+
         const bookingOptions = document.querySelectorAll('.booking-option');
-        
+
         bookingOptions.forEach(option => {
             option.addEventListener('click', () => {
-                
+
                 bookingOptions.forEach(opt => opt.classList.remove('active'));
-                
+
                 option.classList.add('active');
             });
         });
 
-        
+
         function openLogin() {
             document.getElementById('loginModal').style.display = 'flex';
         }
@@ -608,8 +616,8 @@ session_start();
             document.getElementById('loginModal').style.display = 'none';
         }
 
-        
-        window.onclick = function(event) {
+
+        window.onclick = function (event) {
             const modal = document.getElementById('loginModal');
             if (event.target == modal) {
                 modal.style.display = 'none';
@@ -617,10 +625,10 @@ session_start();
         }
     </script>
 
-    
+
     <script>
-       
-               const chatbotIcon = document.querySelector('.chatbot-icon');
+
+        const chatbotIcon = document.querySelector('.chatbot-icon');
         const chatbotContainer = document.getElementById('chatbot-container');
         const closeChatBtn = document.querySelector('.close-chat');
         const chatInput = document.querySelector('.chatbot-input input');
@@ -638,16 +646,16 @@ session_start();
         function sendMessage() {
             const message = chatInput.value.trim();
             if (message) {
-                
+
                 const userMessage = document.createElement('div');
                 userMessage.className = 'message user-message';
                 userMessage.textContent = message;
                 chatMessages.appendChild(userMessage);
-                
-                
+
+
                 chatInput.value = '';
-                
-                
+
+
                 setTimeout(() => {
                     const botMessage = document.createElement('div');
                     botMessage.className = 'message bot-message';
@@ -665,7 +673,7 @@ session_start();
             }
         });
 
-        
+
         const searchToggle = document.querySelector('.search-toggle');
         const searchBox = document.querySelector('.search-box');
 
@@ -678,30 +686,30 @@ session_start();
     </script>
 
     <script>
-       
+
         const flightBookingModal = document.getElementById('flightBookingModal');
         const bookNowButtons = document.querySelectorAll('.book-now-btn');
         const closeModalBtn = document.querySelector('.close-modal');
         const modalRoute = document.getElementById('modalRoute');
         const selectFlightButtons = document.querySelectorAll('.select-flight');
 
-        
+
         bookNowButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const destination = button.closest('.fare-content').querySelector('.destination').textContent;
                 modalRoute.textContent = destination;
                 flightBookingModal.style.display = 'block';
-                document.body.style.overflow = 'hidden'; 
+                document.body.style.overflow = 'hidden';
             });
         });
 
-        
+
         closeModalBtn.addEventListener('click', () => {
             flightBookingModal.style.display = 'none';
-            document.body.style.overflow = 'auto'; 
+            document.body.style.overflow = 'auto';
         });
 
-        
+
         window.addEventListener('click', (event) => {
             if (event.target === flightBookingModal) {
                 flightBookingModal.style.display = 'none';
@@ -716,7 +724,7 @@ session_start();
                 const price = timeSlot.querySelector('.price').textContent;
                 const flightClass = button.closest('.flight-class').querySelector('h3').textContent;
                 const route = modalRoute.textContent;
-                
+
                 alert(`Flight selected!\n\nRoute: ${route}\nClass: ${flightClass}\nTime: ${time}\nPrice: ${price}\n\nProceeding to payment...`);
                 flightBookingModal.style.display = 'none';
                 document.body.style.overflow = 'auto';
@@ -724,24 +732,25 @@ session_start();
         });
 
         function toggleMenu() {
-        const menu = document.getElementById('navBar');
-    
-        if (menu.style.display === 'none' || menu.style.display === '') {
-            menu.style.display = 'inline-flex';
-        } else {
-            menu.style.display = 'none';
-        }
-    }
+            const menu = document.getElementById('navBar');
 
-
-        window.onclick = function(event) {
-        if (!event.target.matches('.checkbtn') && !event.target.matches('.fa-bars')) {
-            const menu = document.getElementById('navBAr');
-            if (menu.style.display === 'block') {
+            if (menu.style.display === 'none' || menu.style.display === '') {
+                menu.style.display = 'inline-flex';
+            } else {
                 menu.style.display = 'none';
             }
         }
-    }
+
+
+        window.onclick = function (event) {
+            if (!event.target.matches('.checkbtn') && !event.target.matches('.fa-bars')) {
+                const menu = document.getElementById('navBAr');
+                if (menu.style.display === 'block') {
+                    menu.style.display = 'none';
+                }
+            }
+        }
     </script>
 </body>
+
 </html>
