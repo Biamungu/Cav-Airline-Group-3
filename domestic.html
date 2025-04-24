@@ -1,118 +1,468 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Domestic Services - Cav Grey Airlines</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f0f4f8;
+        color: #333;
+      }
+
+      header {
+        background: #007bff;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        padding: 10px 15px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+      }
+
+      .booking-page {
+        max-width: 1200px;
+        margin: 30px auto;
+        padding: 0 20px;
+      }
+
+      .service-title {
+        text-align: center;
+        color: #007bff;
+        margin-bottom: 30px;
+      }
+
+      .booking-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 50px;
+      }
+
+      .booking-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      .booking-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .booking-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .booking-card h3 {
+        padding: 15px 20px 0;
+        margin: 0;
+      }
+
+      .service-details {
+        padding: 0 20px 15px;
+      }
+
+      .frequency,
+      .duration,
+      .starting-price {
+        margin: 8px 0;
+      }
+
+      .service-features {
+        list-style: none;
+        padding: 0;
+        margin: 15px 0;
+      }
+
+      .service-features li {
+        margin-bottom: 8px;
+      }
+
+      .service-features i {
+        margin-right: 8px;
+        color: #007bff;
+      }
+
+      .booking-form {
+        padding: 0 20px 20px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      .passenger-select {
+        display: flex;
+        gap: 10px;
+        margin: 15px 0;
+      }
+
+      .passenger-select .form-group {
+        flex: 1;
+      }
+
+      .book-now-btn {
+        width: 100%;
+        padding: 12px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .book-now-btn:hover {
+        background: #0056b3;
+      }
+
+      .service-benefits {
+        margin-top: 50px;
+      }
+
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+      }
+
+      .benefit-card {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .benefit-card i {
+        font-size: 2.5rem;
+        color: #007bff;
+        margin-bottom: 15px;
+      }
+
+      footer {
+        background: #333;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        margin-top: 50px;
+      }
+    </style>
+  </head>
+  <body>
     <header>
-        <h1>Cav Grey Airlines - Domestic Services</h1>
-        <nav>
-            <a href="index.html">Back to Home</a>
-        </nav>
+      <h1>Cav Grey Airlines - Domestic Services</h1>
+      <nav>
+        <a href="index.php">Back to Home</a>
+      </nav>
     </header>
 
     <div class="booking-page">
-        <h2 class="service-title">Our Domestic Routes</h2>
-        
-        <div class="booking-grid">
-            <div class="booking-card">
-                <img src="images/1.jpg" alt="Lusaka to Livingstone">
-                <h3>Lusaka - Livingstone</h3>
-                <div class="service-details">
-                    <p class="frequency">3 Flights Daily</p>
-                    <p class="duration"><i class="fas fa-clock"></i> 1h 15m</p>
-                    <p class="starting-price">From K1,130</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-utensils"></i> Complimentary Snacks</li>
-                        <li><i class="fas fa-wifi"></i> In-flight Wi-Fi</li>
-                        <li><i class="fas fa-suitcase"></i> 23kg Baggage</li>
-                    </ul>
-                </div>
-                <button onclick="window.location.href='index.html#book'" class="book-now-btn">Book Now</button>
+      <h2 class="service-title">Our Domestic Routes</h2>
+
+      <div class="booking-grid">
+        <div class="booking-card">
+          <img src="images/1.jpg" alt="Lusaka to Livingstone" />
+          <h3>Lusaka - Livingstone</h3>
+          <div class="service-details">
+            <p class="frequency">3 Flights Daily</p>
+            <p class="duration"><i class="fas fa-clock"></i> 1h 15m</p>
+            <p class="starting-price">From K1,130</p>
+            <ul class="service-features">
+              <li><i class="fas fa-utensils"></i> Complimentary Snacks</li>
+              <li><i class="fas fa-wifi"></i> In-flight Wi-Fi</li>
+              <li><i class="fas fa-suitcase"></i> 23kg Baggage</li>
+            </ul>
+          </div>
+          <form class="booking-form" action="book_process.php" method="post">
+            <input type="hidden" name="from" value="Lusaka" />
+            <input type="hidden" name="to" value="Livingstone" />
+
+            <div class="form-group">
+              <label for="depart-1">Departure Date:</label>
+              <input type="date" id="depart-1" name="depart" required />
             </div>
 
-            <div class="booking-card">
-                <img src="images/2.jpg" alt="Lusaka to Ndola">
-                <h3>Lusaka - Ndola</h3>
-                <div class="service-details">
-                    <p class="frequency">4 Flights Daily</p>
-                    <p class="duration"><i class="fas fa-clock"></i> 45m</p>
-                    <p class="starting-price">From K950</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-utensils"></i> Complimentary Snacks</li>
-                        <li><i class="fas fa-wifi"></i> In-flight Wi-Fi</li>
-                        <li><i class="fas fa-suitcase"></i> 23kg Baggage</li>
-                    </ul>
-                </div>
-                <button onclick="window.location.href='index.html#book'" class="book-now-btn">Book Now</button>
+            <div class="form-group">
+              <label for="return-1">Return Date:</label>
+              <input type="date" id="return-1" name="return" />
             </div>
 
-            <div class="booking-card">
-                <img src="images/3.jpg" alt="Lusaka to Solwezi">
-                <h3>Lusaka - Solwezi</h3>
-                <div class="service-details">
-                    <p class="frequency">2 Flights Daily</p>
-                    <p class="duration"><i class="fas fa-clock"></i> 1h 30m</p>
-                    <p class="starting-price">From K1,250</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-utensils"></i> Complimentary Snacks</li>
-                        <li><i class="fas fa-wifi"></i> In-flight Wi-Fi</li>
-                        <li><i class="fas fa-suitcase"></i> 23kg Baggage</li>
-                    </ul>
-                </div>
-                <button onclick="window.location.href='index.html#book'" class="book-now-btn">Book Now</button>
+            <div class="passenger-select">
+              <div class="form-group">
+                <label for="adult-1">Adults:</label>
+                <select id="adult-1" name="adult" required>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="child-1">Children:</label>
+                <select id="child-1" name="child">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="infant-1">Infants:</label>
+                <select id="infant-1" name="infant">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                </select>
+              </div>
             </div>
 
-            <div class="booking-card">
-                <img src="images/4.jpg" alt="Ndola to Livingstone">
-                <h3>Ndola - Livingstone</h3>
-                <div class="service-details">
-                    <p class="frequency">2 Flights Daily</p>
-                    <p class="duration"><i class="fas fa-clock"></i> 2h</p>
-                    <p class="starting-price">From K1,450</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-utensils"></i> Complimentary Snacks</li>
-                        <li><i class="fas fa-wifi"></i> In-flight Wi-Fi</li>
-                        <li><i class="fas fa-suitcase"></i> 23kg Baggage</li>
-                    </ul>
-                </div>
-                <button onclick="window.location.href='index.html#book'" class="book-now-btn">Book Now</button>
-            </div>
+            <button type="submit" class="book-now-btn">Book Now</button>
+          </form>
         </div>
 
-        <div class="service-benefits">
-            <h2>Domestic Flight Benefits</h2>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <i class="fas fa-clock"></i>
-                    <h3>Flexible Scheduling</h3>
-                    <p>Multiple daily flights to suit your schedule</p>
-                </div>
-                <div class="benefit-card">
-                    <i class="fas fa-suitcase-rolling"></i>
-                    <h3>Generous Baggage</h3>
-                    <p>23kg checked baggage included on all flights</p>
-                </div>
-                <div class="benefit-card">
-                    <i class="fas fa-percent"></i>
-                    <h3>Regular Promotions</h3>
-                    <p>Special deals and discounted fares</p>
-                </div>
-                <div class="benefit-card">
-                    <i class="fas fa-headset"></i>
-                    <h3>24/7 Support</h3>
-                    <p>Round-the-clock customer service</p>
-                </div>
+        <div class="booking-card">
+          <img src="images/2.jpg" alt="Lusaka to Ndola" />
+          <h3>Lusaka - Ndola</h3>
+          <div class="service-details">
+            <p class="frequency">4 Flights Daily</p>
+            <p class="duration"><i class="fas fa-clock"></i> 45m</p>
+            <p class="starting-price">From K950</p>
+            <ul class="service-features">
+              <li><i class="fas fa-utensils"></i> Complimentary Snacks</li>
+              <li><i class="fas fa-wifi"></i> In-flight Wi-Fi</li>
+              <li><i class="fas fa-suitcase"></i> 23kg Baggage</li>
+            </ul>
+          </div>
+          <form class="booking-form" action="book_process.php" method="post">
+            <input type="hidden" name="from" value="Lusaka" />
+            <input type="hidden" name="to" value="Ndola" />
+
+            <div class="form-group">
+              <label for="depart-2">Departure Date:</label>
+              <input type="date" id="depart-2" name="depart" required />
             </div>
+
+            <div class="form-group">
+              <label for="return-2">Return Date:</label>
+              <input type="date" id="return-2" name="return" />
+            </div>
+
+            <div class="passenger-select">
+              <div class="form-group">
+                <label for="adult-2">Adults:</label>
+                <select id="adult-2" name="adult" required>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="child-2">Children:</label>
+                <select id="child-2" name="child">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="infant-2">Infants:</label>
+                <select id="infant-2" name="infant">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" class="book-now-btn">Book Now</button>
+          </form>
         </div>
+
+        <div class="booking-card">
+          <img src="images/3.jpg" alt="Lusaka to Solwezi" />
+          <h3>Lusaka - Solwezi</h3>
+          <div class="service-details">
+            <p class="frequency">2 Flights Daily</p>
+            <p class="duration"><i class="fas fa-clock"></i> 1h 30m</p>
+            <p class="starting-price">From K1,250</p>
+            <ul class="service-features">
+              <li><i class="fas fa-utensils"></i> Complimentary Snacks</li>
+              <li><i class="fas fa-wifi"></i> In-flight Wi-Fi</li>
+              <li><i class="fas fa-suitcase"></i> 23kg Baggage</li>
+            </ul>
+          </div>
+          <form class="booking-form" action="book_process.php" method="post">
+            <input type="hidden" name="from" value="Lusaka" />
+            <input type="hidden" name="to" value="Solwezi" />
+
+            <div class="form-group">
+              <label for="depart-3">Departure Date:</label>
+              <input type="date" id="depart-3" name="depart" required />
+            </div>
+
+            <div class="form-group">
+              <label for="return-3">Return Date:</label>
+              <input type="date" id="return-3" name="return" />
+            </div>
+
+            <div class="passenger-select">
+              <div class="form-group">
+                <label for="adult-3">Adults:</label>
+                <select id="adult-3" name="adult" required>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="child-3">Children:</label>
+                <select id="child-3" name="child">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="infant-3">Infants:</label>
+                <select id="infant-3" name="infant">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" class="book-now-btn">Book Now</button>
+          </form>
+        </div>
+
+        <div class="booking-card">
+          <img src="images/4.jpg" alt="Ndola to Livingstone" />
+          <h3>Ndola - Livingstone</h3>
+          <div class="service-details">
+            <p class="frequency">2 Flights Daily</p>
+            <p class="duration"><i class="fas fa-clock"></i> 2h</p>
+            <p class="starting-price">From K1,450</p>
+            <ul class="service-features">
+              <li><i class="fas fa-utensils"></i> Complimentary Snacks</li>
+              <li><i class="fas fa-wifi"></i> In-flight Wi-Fi</li>
+              <li><i class="fas fa-suitcase"></i> 23kg Baggage</li>
+            </ul>
+          </div>
+          <form class="booking-form" action="book_process.php" method="post">
+            <input type="hidden" name="from" value="Ndola" />
+            <input type="hidden" name="to" value="Livingstone" />
+
+            <div class="form-group">
+              <label for="depart-4">Departure Date:</label>
+              <input type="date" id="depart-4" name="depart" required />
+            </div>
+
+            <div class="form-group">
+              <label for="return-4">Return Date:</label>
+              <input type="date" id="return-4" name="return" />
+            </div>
+
+            <div class="passenger-select">
+              <div class="form-group">
+                <label for="adult-4">Adults:</label>
+                <select id="adult-4" name="adult" required>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="child-4">Children:</label>
+                <select id="child-4" name="child">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="infant-4">Infants:</label>
+                <select id="infant-4" name="infant">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" class="book-now-btn">Book Now</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="service-benefits">
+        <h2>Domestic Flight Benefits</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <i class="fas fa-clock"></i>
+            <h3>Flexible Scheduling</h3>
+            <p>Multiple daily flights to suit your schedule</p>
+          </div>
+          <div class="benefit-card">
+            <i class="fas fa-suitcase-rolling"></i>
+            <h3>Generous Baggage</h3>
+            <p>23kg checked baggage included on all flights</p>
+          </div>
+          <div class="benefit-card">
+            <i class="fas fa-percent"></i>
+            <h3>Regular Promotions</h3>
+            <p>Special deals and discounted fares</p>
+          </div>
+          <div class="benefit-card">
+            <i class="fas fa-headset"></i>
+            <h3>24/7 Support</h3>
+            <p>Round-the-clock customer service</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <footer>
-        <p>&copy; 2025 Cav Airlines. All rights reserved.</p>
+      <p>&copy; 2025 Cav Grey Airlines. All rights reserved.</p>
     </footer>
-</body>
-</html> 
+  </body>
+</html>
