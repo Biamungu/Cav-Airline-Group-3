@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000000; /* Black background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: #ffd700; /* Gold text */
+  }
+  .form-container {
+    background: #000000; /* Black background */
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3); /* Gold shadow */
+    width: 350px;
+    text-align: center;
+    border: 1px solid #ffd700; /* Gold border */
+  }
+  h2 {
+    text-align: center;
+    color: #ffd700; /* Gold */
+  }
+  .error {
+    text-align: center;
+    color: #ff0000; /* Keeping red for errors */
+    margin-bottom: 10px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    margin-top: 10px;
+    color: #ffd700; /* Gold */
+  }
+  input {
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ffd700; /* Gold */
+    background-color: #000000; /* Black */
+    color: #ffd700; /* Gold text */
+  }
+  button {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #ffd700; /* Gold */
+    color: #000000; /* Black text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  button:hover {
+    background-color: #ffc800; /* Darker gold */
+  }
+  .button_l,
+  .logout-btn {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #000000; /* Black text */
+    background-color: #ffd700; /* Gold */
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  .button_l:hover,
+  .logout-btn:hover {
+    background-color: #ffc800; /* Darker gold */
+  }
+  .auth-buttons {
+    margin-top: 15px;
+  }
+  

@@ -99,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
                 </div>
             </div>
             <div class="dropdown">
-                <a href="Support.php" class="dropbtn">Help</a>
+                <a href="Support.php" class="dropbtn">Contact Us</a>
                 
             </div>
             <div class ="button_log">
