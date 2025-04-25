@@ -1,28 +1,28 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
 
 include 'db.php';
-
-session_start();
 
 $flightNotification = "";
 $hotelNotification = "";
 $carNotification = "";
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_POST['bookingType'] == 'flights') {
-    $tripType = htmlspecialchars($_POST['trip-type']);
     $from = htmlspecialchars($_POST['from']);
     $to = htmlspecialchars($_POST['to']);
-    $departDate = htmlspecialchars($_POST['departDate']);
-    $returnDate = htmlspecialchars($_POST['returnDate']);
-    $adults = intval($_POST['adults']);
-    $children = intval($_POST['children']);
-    $infants = intval($_POST['infants']);
-    $cabinClass = htmlspecialchars($_POST['cabinClass']);
-   
-    $flightNotification = "Flight booking successful! From: $from To: $to Depart Date: $departDate.";
-}
+    $depart = htmlspecialchars($_POST['depart']);
+    $return = htmlspecialchars($_POST['return']);
+    $adult = intval($_POST['adult']);
+    $child = intval($_POST['child']);
+    $infant = intval($_POST['infant']);
 
+    $flightNotification = "Flight booking successful! From: $from To: $to Depart Date: $depart.";
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_POST['bookingType'] == 'hotels') {
     $hotelDestination = htmlspecialchars($_POST['destination']);
@@ -32,7 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
     $hotelChildren = intval($_POST['hotelChildren']);
     $rooms = intval($_POST['rooms']);
     $starRating = htmlspecialchars($_POST['starRating']);
-    
 
     $hotelNotification = "Hotel booking successful! Destination: $hotelDestination Check-in: $checkIn Check-out: $checkOut.";
 }
@@ -44,38 +43,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
     $dropoffDate = htmlspecialchars($_POST['dropoffDate']);
     $dropoffTime = htmlspecialchars($_POST['dropoffTime']);
     $carType = htmlspecialchars($_POST['carType']);
-    
-  
+
     $carNotification = "Car booking successful! Pick-up Location: $pickupLocation Pick-up Date: $pickupDate.";
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Booking</title>
-    <link rel="stylesheet" href="styles5.css"> 
+    <link rel="stylesheet" href="styles5.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
 
     <header>
-       <div class="logo_div">
-        <div id="logoToggle" class="logo">
-            <h1 >Cav Grey Airlines</h1>
+        <div class="logo_div">
+            <div id="logoToggle" class="logo">
+                <h1>Cav Grey Airlines</h1>
+            </div>
 
+            <div class="button_div">
+                <label for="checkbutton" class="checkbtn">
+                    <i class="fa-solid fa-bars" onclick="toggleMenu()"></i>
+                </label>
+            </div>
         </div>
 
-        <div class="button_div">
-        <label for="checkbutton" class="checkbtn">
-        <i class="fa-solid fa-bars" onclick="toggleMenu()"></i>
-        </label>
-        </div>
-       </div>
-        
-    
         <nav class="Navbar_top" id="navBar">
             <div class="dropdown">
                 <a href="index.php" class="dropbtn">Home</a>
@@ -94,20 +92,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
                 <a href="#map" class="dropbtn">Map</a>
                 <div class="dropdown-content">
                     <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63820.97889999999!2d28.322352!3d-15.387525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1940f5a7b5f5f5f5%3A0x5f5f5f5f5f5f5f5f!2sLusaka%2C%20Zambia!5e0!3m2!1sen!2szm!4v1633024000000!5m2!1sen!2szm" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63820.97889999999!2d28.322352!3d-15.387525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1940f5a7b5f5f5f5%3A0x5f5f5f5f5f5f5f5f!2sLusaka%2C%20Zambia!5e0!3m2!1sen!2szm!4v1633024000000!5m2!1sen!2szm"
+                            allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
             </div>
             <div class="dropdown">
                 <a href="Support.php" class="dropbtn">Help</a>
-                
             </div>
-            <div class ="button_log">
+            <div class="button_log">
                 <button class="button_l">
-                     <a href="Login.php">Login</a>
+                    <a href="dashboard.php">Dashboard</a>
                 </button>
             </div>
-
         </nav>
     </header>
 
@@ -134,132 +132,71 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
                 </div>
             <?php endif; ?>
 
-            <form class="booking-form flights-form active" method="POST">
+            <form class="booking-form flights-form active" method="POST" action="book_process.php">
                 <input type="hidden" name="bookingType" value="flights">
-                <div class="trip-type-selector">
-                    <label class="radio-container">
-                        <input type="radio" name="trip-type" value="round-trip" checked>
-                        <span class="radio-label">Round Trip</span>
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="trip-type" value="one-way">
-                        <span class="radio-label">One Way</span>
-                    </label>
-                    <label class="radio-container">
-                        <input type="radio" name="trip-type" value="multi-city">
-                        <span class="radio-label">Multi-City</span>
-                    </label>
-                </div>
-
                 <div class="form-grid">
                     <div class="form-group">
-                        <label>
-                            <i class="fas fa-plane-departure"></i>
-                            From
-                        </label>
-                        <div class="input-with-icon">
-                            <input type="text" name="from" placeholder="City or Airport" class="location-input" required>
-                            <i class="fas fa-search location-search"></i>
-                        </div>
+                        <label>From</label>
+                        <select name="from" required>
+                            <option value="Lusaka, Zambia">Lusaka, Zambia</option>
+                            <option value="Ndola, Zambia">Ndola, Zambia</option>
+                            <option value="Livingstone, Zambia">Livingstone, Zambia</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <label>
-                            <i class="fas fa-plane-arrival"></i>
-                            To
-                        </label>
-                        <div class="input-with-icon">
-                            <input type="text" name="to" placeholder="City or Airport" class="location-input" required>
-                            <i class="fas fa-search location-search"></i>
-                        </div>
+                        <label>To</label>
+                        <select name="to" required>
+                            <option value="Harare, Zimbabwe">Harare, Zimbabwe</option>
+                            <option value="Johannesburg, South Africa">Johannesburg, South Africa</option>
+                            <option value="Nairobi, Kenya">Nairobi, Kenya</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <label>
-                            <i class="fas fa-calendar"></i>
-                            Depart
-                        </label>
-                        <div class="date-input-container">
-                            <input type="date" name="departDate" class="date-input" required>
-                            <i class="fas fa-calendar-alt date-icon"></i>
-                        </div>
+                        <label>Depart</label>
+                        <input type="date" name="depart" required>
                     </div>
 
                     <div class="form-group return-date">
-                        <label>
-                            <i class="fas fa-calendar"></i>
-                            Return
-                        </label>
-                        <div class="date-input-container">
-                            <input type="date" name="returnDate" class="date-input">
-                            <i class="fas fa-calendar-alt date-icon"></i>
-                        </div>
+                        <label>Return</label>
+                        <input type="date" name="return">
                     </div>
 
                     <div class="form-group">
-                        <label>
-                            <i class="fas fa-users"></i>
-                            Passengers
-                        </label>
-                        <div class="passenger-selector">
-                            <div class="passenger-type">
-                                <div class="passenger-info">
-                                    <span class="passenger-label">Adults</span>
-                                    <span class="passenger-age">12+ years</span>
-                                </div>
-                                <div class="counter">
-                                    <button type="button" class="counter-btn minus">-</button>
-                                    <span class="count">1</span>
-                                    <button type="button" class="counter-btn plus">+</button>
-                                </div>
-                                <input type="hidden" name="adults" value="1">
-                            </div>
-                            <div class="passenger-type">
-                                <div class="passenger-info">
-                                    <span class="passenger-label">Children</span>
-                                    <span class="passenger-age">2-11 years</span>
-                                </div>
-                                <div class="counter">
-                                    <button type="button" class="counter-btn minus">-</button>
-                                    <span class="count">0</span>
-                                    <button type="button" class="counter-btn plus">+</button>
-                                </div>
-                                <input type="hidden" name="children" value="0">
-                            </div>
-                            <div class="passenger-type">
-                                <div class="passenger-info">
-                                    <span class="passenger-label">Infants</span>
-                                    <span class="passenger-age">Under 2</span>
-                                </div>
-                                <div class="counter">
-                                    <button type="button" class="counter-btn minus">-</button>
-                                    <span class="count">0</span>
-                                    <button type="button" class="counter-btn plus">+</button>
-                                </div>
-                                <input type="hidden" name="infants" value="0">
-                            </div>
-                        </div>
+                        <label>Adult</label>
+                        <select name="adult">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <label>
-                            <i class="fas fa-chair"></i>
-                            Cabin Class
-                        </label>
-                        <div class="cabin-class-selector">
-                            <select name="cabinClass" class="cabin-select" required>
-                                <option value="economy">Economy</option>
-                                <option value="premium-economy">Premium Economy</option>
-                                <option value="business">Business</option>
-                                <option value="first">First Class</option>
-                            </select>
-                        </div>
+                        <label>Child</label>
+                        <select name="child">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Infant</label>
+                        <select name="infant">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
                     </div>
                 </div>
 
                 <div class="form-actions">
                     <button type="submit" class="search-btn">
-                        <i class="fas fa-search"></i>
+                        <i class="fas fa-button"></i>
+                        Book Now
                     </button>
                 </div>
             </form>
@@ -279,7 +216,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
                             Destination
                         </label>
                         <div class="input-with-icon">
-                            <input type="text" name="destination" placeholder="City, Hotel, or Area" class="location-input" required>
+                            <input type="text" name="destination" placeholder="City, Hotel, or Area"
+                                class="location-input" required>
                             <i class="fas fa-search location-search"></i>
                         </div>
                     </div>
@@ -386,7 +324,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
                             Pick-up Location
                         </label>
                         <div class="input-with-icon">
-                            <input type="text" name="pickupLocation" placeholder="City, Airport, or Address" class="location-input" required>
+                            <input type="text" name="pickupLocation" placeholder="City, Airport, or Address"
+                                class="location-input" required>
                             <i class="fas fa-search location-search"></i>
                         </div>
                     </div>
@@ -462,220 +401,227 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
         </div>
     </section>
 
-    <section class="featured-flights">
-            <h2>Featured Flight Destinations</h2>
-            <div class="flight-cards">
-                <div class="flight-card">
-                    <div class="flight-image">
-                        <img src="/images/paris.jpeg" alt="Paris">
-                        <div class="flight-price">From $599</div>
-                    </div>
-                    <div class="flight-info">
-                        <h3>Paris, France</h3>
-                        <p class="flight-route">New York (JFK) → Paris (CDG)</p>
-                        <p class="flight-description">Experience the city of love with our special winter deals. Direct flights available daily.</p>
-                        <div class="flight-details">
-                            <span><i class="fas fa-clock"></i> 7h 25m</span>
-                            <span><i class="fas fa-plane"></i> Direct</span>
-                        </div>
-                        <button class="book-now-btn">Book Now</button>
-                    </div>
+    <!-- <section class="featured-flights">
+        <h2>Featured Flight Destinations</h2>
+        <div class="flight-cards">
+            <div class="flight-card">
+                <div class="flight-image">
+                    <img src="images/paris.jpeg" alt="Paris">
+                    <div class="flight-price">From $599</div>
                 </div>
-
-                <div class="flight-card">
-                    <div class="flight-image">
-                        <img src="/images/tokyo.jpeg" alt="Tokyo">
-                        <div class="flight-price">From $899</div>
+                <div class="flight-info">
+                    <h3>Paris, France</h3>
+                    <p class="flight-route">New York (JFK) → Paris (CDG)</p>
+                    <p class="flight-description">Experience the city of love with our special winter deals. Direct
+                        flights available daily.</p>
+                    <div class="flight-details">
+                        <span><i class="fas fa-clock"></i> 7h 25m</span>
+                        <span><i class="fas fa-plane"></i> Direct</span>
                     </div>
-                    <div class="flight-info">
-                        <h3>Tokyo, Japan</h3>
-                        <p class="flight-route">Los Angeles (LAX) → Tokyo (NRT)</p>
-                        <p class="flight-description">Discover the perfect blend of tradition and modernity in Japan's capital.</p>
-                        <div class="flight-details">
-                            <span><i class="fas fa-clock"></i> 11h 40m</span>
-                            <span><i class="fas fa-plane"></i> Direct</span>
-                        </div>
-                        <button class="book-now-btn">Book Now</button>
-                    </div>
-                </div>
-
-                <div class="flight-card">
-                    <div class="flight-image">
-                        <img src="/images/dubai.jpeg" alt="Dubai">
-                        <div class="flight-price">From $749</div>
-                    </div>
-                    <div class="flight-info">
-                        <h3>Dubai, UAE</h3>
-                        <p class="flight-route">London (LHR) → Dubai (DXB)</p>
-                        <p class="flight-description">Experience luxury and adventure in the jewel of the Middle East.</p>
-                        <div class="flight-details">
-                            <span><i class="fas fa-clock"></i> 6h 55m</span>
-                            <span><i class="fas fa-plane"></i> Direct</span>
-                        </div>
-                        <button class="book-now-btn">Book Now</button>
-                    </div>
-                </div>
-
-                <div class="flight-card">
-                    <div class="flight-image">
-                        <img src="/images/sydney.jpeg" alt="Sydney">
-                        <div class="flight-price">From $1099</div>
-                    </div>
-                    <div class="flight-info">
-                        <h3>Sydney, Australia</h3>
-                        <p class="flight-route">Singapore (SIN) → Sydney (SYD)</p>
-                        <p class="flight-description">Explore the vibrant culture and stunning beaches of Australia's largest city.</p>
-                        <div class="flight-details">
-                            <span><i class="fas fa-clock"></i> 8h 15m</span>
-                            <span><i class="fas fa-plane"></i> Direct</span>
-                        </div>
-                        <button class="book-now-btn">Book Now</button>
-                    </div>
+                    <button class="book-now-btn">Book Now</button>
                 </div>
             </div>
-    </section>
 
+            <div class="flight-card">
+                <div class="flight-image">
+                    <img src="images\tokyo.jpeg" alt="Tokyo">
+                    <div class="flight-price">From $899</div>
+                </div>
+                <div class="flight-info">
+                    <h3>Tokyo, Japan</h3>
+                    <p class="flight-route">Los Angeles (LAX) → Tokyo (NRT)</p>
+                    <p class="flight-description">Discover the perfect blend of tradition and modernity in Japan's
+                        capital.</p>
+                    <div class="flight-details">
+                        <span><i class="fas fa-clock"></i> 11h 40m</span>
+                        <span><i class="fas fa-plane"></i> Direct</span>
+                    </div>
+                    <button class="book-now-btn">Book Now</button>
+                </div>
+            </div>
+
+            <div class="flight-card">
+                <div class="flight-image">
+                    <img src="images/dubai.jpeg" alt="Dubai">
+                    <div class="flight-price">From $749</div>
+                </div>
+                <div class="flight-info">
+                    <h3>Dubai, UAE</h3>
+                    <p class="flight-route">London (LHR) → Dubai (DXB)</p>
+                    <p class="flight-description">Experience luxury and adventure in the jewel of the Middle East.</p>
+                    <div class="flight-details">
+                        <span><i class="fas fa-clock"></i> 6h 55m</span>
+                        <span><i class="fas fa-plane"></i> Direct</span>
+                    </div>
+                    <button class="book-now-btn">Book Now</button>
+                </div>
+            </div>
+
+            <div class="flight-card">
+                <div class="flight-image">
+                    <img src="images/sydney.jpeg" alt="Sydney">
+                    <div class="flight-price">From $1099</div>
+                </div>
+                <div class="flight-info">
+                    <h3>Sydney, Australia</h3>
+                    <p class="flight-route">Singapore (SIN) → Sydney (SYD)</p>
+                    <p class="flight-description">Explore the vibrant culture and stunning beaches of Australia's
+                        largest city.</p>
+                    <div class="flight-details">
+                        <span><i class="fas fa-clock"></i> 8h 15m</span>
+                        <span><i class="fas fa-plane"></i> Direct</span>
+                    </div>
+                    <button class="book-now-btn">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section class="hotels-section" id="hotels">
-            <h2>Luxury Hotels & Resorts</h2>
-            <div class="hotel-cards">
-                <div class="hotel-card">
-                    <div class="hotel-image">
-                        <img src="/images/lstone.jpeg" alt="Royal Livingstone Hotel">
-                        <div class="hotel-price">From $450/night</div>
-                    </div>
-                    <div class="hotel-info">
-                        <div class="hotel-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <h3>Royal Livingstone Hotel</h3>
-                        <p class="hotel-location"><i class="fas fa-map-marker-alt"></i> Victoria Falls, Zambia</p>
-                        <p class="hotel-description">Experience luxury on the banks of the Zambezi River with stunning views of Victoria Falls. Features spa, fine dining, and exclusive falls access.</p>
-                        <div class="hotel-amenities">
-                            <span><i class="fas fa-wifi"></i> Free WiFi</span>
-                            <span><i class="fas fa-swimming-pool"></i> Pool</span>
-                            <span><i class="fas fa-spa"></i> Spa</span>
-                        </div>
-                        <button class="book-now-btn">Book Hotel</button>
-                    </div>
+        <h2>Luxury Hotels & Resorts</h2>
+        <div class="hotel-cards">
+            <div class="hotel-card">
+                <div class="hotel-image">
+                    <img src="images/lstone.jpeg" alt="Royal Livingstone Hotel">
+                    <div class="hotel-price">From $450/night</div>
                 </div>
-
-                <div class="hotel-card">
-                    <div class="hotel-image">
-                        <img src="/images/four seasons serengeti.jpeg" alt="Four Seasons Serengeti">
-                        <div class="hotel-price">From $895/night</div>
+                <div class="hotel-info">
+                    <div class="hotel-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
-                    <div class="hotel-info">
-                        <div class="hotel-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <h3>Four Seasons Serengeti</h3>
-                        <p class="hotel-location"><i class="fas fa-map-marker-alt"></i> Serengeti National Park, Tanzania</p>
-                        <p class="hotel-description">Luxury safari lodge with infinity pool overlooking the Serengeti plains. Watch wildlife from your private balcony.</p>
-                        <div class="hotel-amenities">
-                            <span><i class="fas fa-wifi"></i> Free WiFi</span>
-                            <span><i class="fas fa-utensils"></i> Restaurant</span>
-                            <span><i class="fas fa-binoculars"></i> Safari</span>
-                        </div>
-                        <button class="book-now-btn">Book Hotel</button>
+                    <h3>Royal Livingstone Hotel</h3>
+                    <p class="hotel-location"><i class="fas fa-map-marker-alt"></i> Victoria Falls, Zambia</p>
+                    <p class="hotel-description">Experience luxury on the banks of the Zambezi River with stunning views
+                        of Victoria Falls. Features spa, fine dining, and exclusive falls access.</p>
+                    <div class="hotel-amenities">
+                        <span><i class="fas fa-wifi"></i> Free WiFi</span>
+                        <span><i class="fas fa-swimming-pool"></i> Pool</span>
+                        <span><i class="fas fa-spa"></i> Spa</span>
                     </div>
-                </div>
-
-                <div class="hotel-card">
-                    <div class="hotel-image">
-                        <img src="/images/la mamounia.jpeg" alt="La Mamounia">
-                        <div class="hotel-price">From $750/night</div>
-                    </div>
-                    <div class="hotel-info">
-                        <div class="hotel-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <h3>La Mamounia</h3>
-                        <p class="hotel-location"><i class="fas fa-map-marker-alt"></i> Marrakech, Morocco</p>
-                        <p class="hotel-description">Iconic palace hotel featuring traditional Moroccan architecture, luxury spa, and world-class dining experiences.</p>
-                        <div class="hotel-amenities">
-                            <span><i class="fas fa-wifi"></i> Free WiFi</span>
-                            <span><i class="fas fa-spa"></i> Spa</span>
-                            <span><i class="fas fa-swimming-pool"></i> Pool</span>
-                        </div>
-                        <button class="book-now-btn">Book Hotel</button>
-                    </div>
+                    <button class="book-now-btn">Book Hotel</button>
                 </div>
             </div>
+
+            <div class="hotel-card">
+                <div class="hotel-image">
+                    <img src="images/four seasons serengeti.jpeg" alt="Four Seasons Serengeti">
+                    <div class="hotel-price">From $895/night</div>
+                </div>
+                <div class="hotel-info">
+                    <div class="hotel-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Four Seasons Serengeti</h3>
+                    <p class="hotel-location"><i class="fas fa-map-marker-alt"></i> Serengeti National Park, Tanzania
+                    </p>
+                    <p class="hotel-description">Luxury safari lodge with infinity pool overlooking the Serengeti
+                        plains. Watch wildlife from your private balcony.</p>
+                    <div class="hotel-amenities">
+                        <span><i class="fas fa-wifi"></i> Free WiFi</span>
+                        <span><i class="fas fa-utensils"></i> Restaurant</span>
+                        <span><i class="fas fa-binoculars"></i> Safari</span>
+                    </div>
+                    <button class="book-now-btn">Book Hotel</button>
+                </div>
+            </div>
+
+            <div class="hotel-card">
+                <div class="hotel-image">
+                    <img src="images/la mamounia.jpeg" alt="La Mamounia">
+                    <div class="hotel-price">From $750/night</div>
+                </div>
+                <div class="hotel-info">
+                    <div class="hotel-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>La Mamounia</h3>
+                    <p class="hotel-location"><i class="fas fa-map-marker-alt"></i> Marrakech, Morocco</p>
+                    <p class="hotel-description">Iconic palace hotel featuring traditional Moroccan architecture, luxury
+                        spa, and world-class dining experiences.</p>
+                    <div class="hotel-amenities">
+                        <span><i class="fas fa-wifi"></i> Free WiFi</span>
+                        <span><i class="fas fa-spa"></i> Spa</span>
+                        <span><i class="fas fa-swimming-pool"></i> Pool</span>
+                    </div>
+                    <button class="book-now-btn">Book Hotel</button>
+                </div>
+            </div>
+        </div>
     </section>
 
-
     <section class="car-rental-section" id="cars">
-            <h2>Premium Car Rentals</h2>
-            <div class="car-cards">
-                <div class="car-card">
-                    <div class="car-image">
-                        <img src="/images/rover.jpeg" alt="Range Rover Sport">
-                        <div class="car-price">From $150/day</div>
-                    </div>
-                    <div class="car-info">
-                        <h3>Range Rover Sport</h3>
-                        <p class="car-category"><i class="fas fa-car"></i> Luxury SUV</p>
-                        <div class="car-features">
-                            <span><i class="fas fa-user"></i> 5 Seats</span>
-                            <span><i class="fas fa-cog"></i> Automatic</span>
-                            <span><i class="fas fa-gas-pump"></i> Diesel</span>
-                        </div>
-                        <p class="car-description">Perfect for both city drives and safari adventures. Features premium leather interior and advanced off-road capabilities.</p>
-                        <button class="book-now-btn">Reserve Car</button>
-                    </div>
+        <h2>Premium Car Rentals</h2>
+        <div class="car-cards">
+            <div class="car-card">
+                <div class="car-image">
+                    <img src="images/rover.jpeg" alt="Range Rover Sport">
+                    <div class="car-price">From $150/day</div>
                 </div>
-
-                <div class="car-card">
-                    <div class="car-image">
-                        <img src="/images/s class benz.jpeg" alt="Mercedes-Benz S-Class">
-                        <div class="car-price">From $200/day</div>
+                <div class="car-info">
+                    <h3>Range Rover Sport</h3>
+                    <p class="car-category"><i class="fas fa-car"></i> Luxury SUV</p>
+                    <div class="car-features">
+                        <span><i class="fas fa-user"></i> 5 Seats</span>
+                        <span><i class="fas fa-cog"></i> Automatic</span>
+                        <span><i class="fas fa-gas-pump"></i> Diesel</span>
                     </div>
-                    <div class="car-info">
-                        <h3>Mercedes-Benz S-Class</h3>
-                        <p class="car-category"><i class="fas fa-car"></i> Luxury Sedan</p>
-                        <div class="car-features">
-                            <span><i class="fas fa-user"></i> 5 Seats</span>
-                            <span><i class="fas fa-cog"></i> Automatic</span>
-                            <span><i class="fas fa-snowflake"></i> A/C</span>
-                        </div>
-                        <p class="car-description">Ultimate luxury and comfort for executive travel. Includes chauffeur service upon request.</p>
-                        <button class="book-now-btn">Reserve Car</button>
-                    </div>
-                </div>
-
-                <div class="car-card">
-                    <div class="car-image">
-                        <img src="/images/download.jpeg" alt="Toyota Land Cruiser">
-                        <div class="car-price">From $120/day</div>
-                    </div>
-                    <div class="car-info">
-                        <h3>Toyota Land Cruiser</h3>
-                        <p class="car-category"><i class="fas fa-car"></i> Safari SUV</p>
-                        <div class="car-features">
-                            <span><i class="fas fa-user"></i> 7 Seats</span>
-                            <span><i class="fas fa-cog"></i> Automatic</span>
-                            <span><i class="fas fa-mountain"></i> 4x4</span>
-                        </div>
-                        <p class="car-description">Reliable and powerful SUV perfect for safari adventures and rough terrain exploration.</p>
-                        <button class="book-now-btn">Reserve Car</button>
-                    </div>
+                    <p class="car-description">Perfect for both city drives and safari adventures. Features premium
+                        leather interior and advanced off-road capabilities.</p>
+                    <button class="book-now-btn">Reserve Car</button>
                 </div>
             </div>
-     </section>
-</main>
+
+            <div class="car-card">
+                <div class="car-image">
+                    <img src="images/s class benz.jpeg" alt="Mercedes-Benz S-Class">
+                    <div class="car-price">From $200/day</div>
+                </div>
+                <div class="car-info">
+                    <h3>Mercedes-Benz S-Class</h3>
+                    <p class="car-category"><i class="fas fa-car"></i> Luxury Sedan</p>
+                    <div class="car-features">
+                        <span><i class="fas fa-user"></i> 5 Seats</span>
+                        <span><i class="fas fa-cog"></i> Automatic</span>
+                        <span><i class="fas fa-snowflake"></i> A/C</span>
+                    </div>
+                    <p class="car-description">Ultimate luxury and comfort for executive travel. Includes chauffeur
+                        service upon request.</p>
+                    <button class="book-now-btn">Reserve Car</button>
+                </div>
+            </div>
+
+            <div class="car-card">
+                <div class="car-image">
+                    <img src="images/download.jpeg" alt="Toyota Land Cruiser">
+                    <div class="car-price">From $120/day</div>
+                </div>
+                <div class="car-info">
+                    <h3>Toyota Land Cruiser</h3>
+                    <p class="car-category"><i class="fas fa-car"></i> Safari SUV</p>
+                    <div class="car-features">
+                        <span><i class="fas fa-user"></i> 7 Seats</span>
+                        <span><i class="fas fa-cog"></i> Automatic</span>
+                        <span><i class="fas fa-mountain"></i> 4x4</span>
+                    </div>
+                    <p class="car-description">Reliable and powerful SUV perfect for safari adventures and rough terrain
+                        exploration.</p>
+                    <button class="book-now-btn">Reserve Car</button>
+                </div>
+            </div>
+        </div>
+    </section>--->
 
     <footer class="main-footer">
         <div class="footer-content">
@@ -707,170 +653,86 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
         <div class="footer-bottom">
             <p>&copy; 2024 CAV Grey Airlines. All rights reserved.</p>
         </div>
-    </footer> 
+    </footer>
 
     <script>
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
-    });
 
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const bookingForms = document.querySelectorAll('.booking-form');
 
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const bookingForms = document.querySelectorAll('.booking-form');
-
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-        
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            bookingForms.forEach(form => {
-                form.classList.remove('active');
-                if (form.classList.contains('hotels-form') || form.classList.contains('cars-form')) {
-                    form.style.transform = 'translateX(100%)';
-                    form.style.opacity = '0';
-                }
-            });
-
-        
-            button.classList.add('active');
-            const tabId = button.getAttribute('data-tab');
-            const activeForm = document.querySelector(`.${tabId}-form`);
-            
-            if (activeForm) {
-                activeForm.classList.add('active');
-                if (activeForm.classList.contains('hotels-form') || activeForm.classList.contains('cars-form')) {
-                    setTimeout(() => {
-                        activeForm.style.transform = 'translateX(0)';
-                        activeForm.style.opacity = '1';
-                    }, 50);
-                }
-            }
-        });
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-
-        const counterBtns = document.querySelectorAll('.counter-btn');
-        counterBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                const counter = this.parentElement;
-                const countDisplay = counter.querySelector('.count');
-                let count = parseInt(countDisplay.textContent);
-                
-                if (this.classList.contains('plus')) {
-                    count++;
-                } else if (this.classList.contains('minus') && count > 0) {
-                    count--;
-                }
-                
-                countDisplay.textContent = count;
-            });
-        });
-        
-
-        const roomOptions = document.querySelectorAll('.room-option');
-        roomOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                roomOptions.forEach(opt => opt.classList.remove('selected'));
-                this.classList.add('selected');
-            });
-        });
-        
-        const carOptions = document.querySelectorAll('.car-option');
-        carOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                carOptions.forEach(opt => opt.classList.remove('selected'));
-                this.classList.add('selected');
-            });
-        });
-        
-
-        const paymentMethods = document.querySelectorAll('.payment-method');
-        paymentMethods.forEach(method => {
-            method.addEventListener('click', function() {
-                paymentMethods.forEach(m => m.classList.remove('active'));
-                this.classList.add('active');
-                
-            
-                const paymentType = this.querySelector('span').textContent;
-                showPaymentForm(paymentType);
-            });
-        });
-        
-    });
-
-    const flightBookingModal = document.getElementById('flightBookingModal');
-        const bookNowButtons = document.querySelectorAll('.book-now-btn');
-        const closeModalBtn = document.querySelector('.close-modal');
-        const modalRoute = document.getElementById('modalRoute');
-        const selectFlightButtons = document.querySelectorAll('.select-flight');
-
-        
-        bookNowButtons.forEach(button => {
+        tabButtons.forEach(button => {
             button.addEventListener('click', () => {
-                const destination = button.closest('.fare-content').querySelector('.destination').textContent;
-                modalRoute.textContent = destination;
-                flightBookingModal.style.display = 'block';
-                document.body.style.overflow = 'hidden'; 
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                bookingForms.forEach(form => {
+                    form.classList.remove('active');
+                    if (form.classList.contains('hotels-form') || form.classList.contains('cars-form')) {
+                        form.style.transform = 'translateX(100%)';
+                        form.style.opacity = '0';
+                    }
+                });
+
+                button.classList.add('active');
+                const tabId = button.getAttribute('data-tab');
+                const activeForm = document.querySelector(`.${tabId}-form`);
+
+                if (activeForm) {
+                    activeForm.classList.add('active');
+                    if (activeForm.classList.contains('hotels-form') || activeForm.classList.contains('cars-form')) {
+                        setTimeout(() => {
+                            activeForm.style.transform = 'translateX(0)';
+                            activeForm.style.opacity = '1';
+                        }, 50);
+                    }
+                }
             });
         });
 
-        
-        closeModalBtn.addEventListener('click', () => {
-            flightBookingModal.style.display = 'none';
-            document.body.style.overflow = 'auto'; 
-        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const counterBtns = document.querySelectorAll('.counter-btn');
+            counterBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const counter = this.parentElement;
+                    const countDisplay = counter.querySelector('.count');
+                    let count = parseInt(countDisplay.textContent);
 
-        
-        window.addEventListener('click', (event) => {
-            if (event.target === flightBookingModal) {
-                flightBookingModal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        });
+                    if (this.classList.contains('plus')) {
+                        count++;
+                    } else if (this.classList.contains('minus') && count > 0) {
+                        count--;
+                    }
 
-        selectFlightButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const timeSlot = button.closest('.flight-time-slot');
-                const time = timeSlot.querySelector('.time').textContent;
-                const price = timeSlot.querySelector('.price').textContent;
-                const flightClass = button.closest('.flight-class').querySelector('h3').textContent;
-                const route = modalRoute.textContent;
-                
-                alert(`Flight selected!\n\nRoute: ${route}\nClass: ${flightClass}\nTime: ${time}\nPrice: ${price}\n\nProceeding to payment...`);
-                flightBookingModal.style.display = 'none';
-                document.body.style.overflow = 'auto';
+                    countDisplay.textContent = count;
+                    counter.querySelector('input[type="hidden"]').value = count;
+                });
             });
-        });
 
-        function toggleMenu() {
-        const menu = document.getElementById('navBar');
-    
-        if (menu.style.display === 'none' || menu.style.display === '') {
-            menu.style.display = 'inline-flex';
-        } else {
-            menu.style.display = 'none';
-        }
-    }
-
-
-        window.onclick = function(event) {
-        if (!event.target.matches('.checkbtn') && !event.target.matches('.fa-bars')) {
-            const menu = document.getElementById('navBAr');
-            if (menu.style.display === 'block') {
-                menu.style.display = 'none';
+            function toggleMenu() {
+                const menu = document.getElementById('navBar');
+                if (menu.style.display === 'none' || menu.style.display === '') {
+                    menu.style.display = 'inline-flex';
+                } else {
+                    menu.style.display = 'none';
+                }
             }
-        }
-    }
 
+            window.onclick = function (event) {
+                if (!event.target.matches('.checkbtn') && !event.target.matches('.fa-bars')) {
+                    const menu = document.getElementById('navBar');
+                    if (menu.style.display === 'block') {
+                        menu.style.display = 'none';
+                    }
+                }
+            }
+        });
     </script>
-
-    
-
 </body>
+
 </html>
