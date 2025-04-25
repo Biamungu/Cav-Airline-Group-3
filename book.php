@@ -99,7 +99,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
                 </div>
             </div>
             <div class="dropdown">
-                <a href="Support.php" class="dropbtn">Help</a>
+                <a href="Support.php" class="dropbtn">Contact Us</a>
+
             </div>
             <div class="button_log">
                 <button class="button_l">
@@ -401,12 +402,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
         </div>
     </section>
 
-    <!-- <section class="featured-flights">
+    <section class="featured-flights">
         <h2>Featured Flight Destinations</h2>
         <div class="flight-cards">
             <div class="flight-card">
                 <div class="flight-image">
-                    <img src="images/paris.jpeg" alt="Paris">
+
                     <div class="flight-price">From $599</div>
                 </div>
                 <div class="flight-info">
@@ -424,7 +425,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
 
             <div class="flight-card">
                 <div class="flight-image">
-                    <img src="images\tokyo.jpeg" alt="Tokyo">
+
                     <div class="flight-price">From $899</div>
                 </div>
                 <div class="flight-info">
@@ -442,7 +443,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
 
             <div class="flight-card">
                 <div class="flight-image">
-                    <img src="images/dubai.jpeg" alt="Dubai">
+
                     <div class="flight-price">From $749</div>
                 </div>
                 <div class="flight-info">
@@ -459,7 +460,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
 
             <div class="flight-card">
                 <div class="flight-image">
-                    <img src="images/sydney.jpeg" alt="Sydney">
+
                     <div class="flight-price">From $1099</div>
                 </div>
                 <div class="flight-info">
@@ -482,7 +483,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
         <div class="hotel-cards">
             <div class="hotel-card">
                 <div class="hotel-image">
-                    <img src="images/lstone.jpeg" alt="Royal Livingstone Hotel">
+
                     <div class="hotel-price">From $450/night</div>
                 </div>
                 <div class="hotel-info">
@@ -508,7 +509,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
 
             <div class="hotel-card">
                 <div class="hotel-image">
-                    <img src="images/four seasons serengeti.jpeg" alt="Four Seasons Serengeti">
+
                     <div class="hotel-price">From $895/night</div>
                 </div>
                 <div class="hotel-info">
@@ -535,7 +536,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
 
             <div class="hotel-card">
                 <div class="hotel-image">
-                    <img src="images/la mamounia.jpeg" alt="La Mamounia">
+
                     <div class="hotel-price">From $750/night</div>
                 </div>
                 <div class="hotel-info">
@@ -566,7 +567,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
         <div class="car-cards">
             <div class="car-card">
                 <div class="car-image">
-                    <img src="images/rover.jpeg" alt="Range Rover Sport">
+
                     <div class="car-price">From $150/day</div>
                 </div>
                 <div class="car-info">
@@ -585,7 +586,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
 
             <div class="car-card">
                 <div class="car-image">
-                    <img src="images/s class benz.jpeg" alt="Mercedes-Benz S-Class">
+
                     <div class="car-price">From $200/day</div>
                 </div>
                 <div class="car-info">
@@ -604,7 +605,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
 
             <div class="car-card">
                 <div class="car-image">
-                    <img src="images/download.jpeg" alt="Toyota Land Cruiser">
+
                     <div class="car-price">From $120/day</div>
                 </div>
                 <div class="car-info">
@@ -620,6 +621,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
                     <button class="book-now-btn">Reserve Car</button>
                 </div>
             </div>
+        </div>
         </div>
     </section>--->
 

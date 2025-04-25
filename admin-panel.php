@@ -47,34 +47,14 @@ $result = $conn->query("SELECT b.*, u.first_name FROM bookings b JOIN users u ON
 <head>
     <meta charset="UTF-8">
     <title>Admin Panel - Manage Bookings</title>
-    <style>
-        body { font-family: Arial; padding: 20px; background: #f0f4f8; }
-        table { width: 100%; border-collapse: collapse; background: #fff; }
-        th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }
-        form { display: inline; }
-        .actions { display: flex; gap: 5px; justify-content: center; }
-        h2 { color: #007bff; }
-        .message {
-            background-color: #d4edda;
-            color: #155724;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #c3e6cb;
-            border-radius: 5px;
-        }
-        .error {
-            background-color: #f8d7da;
-            color: #721c24;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #f5c6cb;
-            border-radius: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="admin.css">
 </head>
 <body>
 
 <h2>Admin Panel - Booking Management</h2>
+<nav>
+        <a href="index.php">Back to Home</a>
+      </nav>
 
 <?php if (isset($message)): ?>
     <div class="message"><?php echo $message; ?></div>

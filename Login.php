@@ -52,74 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #eef2f7;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .form-container {
-      background: white;
-      padding: 25px 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      width: 350px;
-      text-align: center;
-    }
-    h2 {
-      text-align: center;
-      color: #007bff;
-    }
-    .error {
-      text-align: center;
-      color: red;
-      margin-bottom: 10px;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-    }
-    label {
-      margin-top: 10px;
-    }
-    input {
-      padding: 8px;
-      margin-top: 5px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    button {
-      margin-top: 15px;
-      padding: 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    .button_l, .logout-btn {
-      display: inline-block;
-      margin: 5px;
-      padding: 10px 15px;
-      text-decoration: none;
-      color: white;
-      background-color: #007bff;
-      border-radius: 5px;
-    }
-    .button_l:hover, .logout-btn:hover {
-      background-color: #0056b3;
-    }
-    .auth-buttons {
-      margin-top: 15px;
-    }
-  </style>
+  <link rel="stylesheet" href="login.css">
 </head>
 <body>
 

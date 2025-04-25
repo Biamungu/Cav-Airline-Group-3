@@ -1,0 +1,89 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f0f0f0;
+  padding: 30px;
+}
+
+h1 {
+  text-align: center;
+  color: #ffd700; /* Gold */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 25px;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+
+th {
+  background-color: #000000; /* Black */
+  color: #ffd700; /* Gold */
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.status-confirmed {
+  color: #ffd700; /* Gold */
+  font-weight: bold;
+}
+
+.status-cancelled {
+  color: #000000; /* Black */
+  font-weight: bold;
+}
+
+.status-completed {
+  color: #333333; /* Dark gray */
+  font-weight: bold;
+}
+
+.payment-paid {
+  color: #ffd700; /* Gold */
+  font-weight: bold;
+}
+
+.payment-pending {
+  color: #ccaa00; /* Darker gold */
+  font-weight: bold;
+}
+
+.payment-refunded {
+  color: #666666; /* Medium gray */
+  font-weight: bold;
+}
+
+.payment-cancelled {
+  color: #000000; /* Black */
+  font-weight: bold;
+}
+
+/* Navigation Styles */
+nav {
+  text-align: center;
+  margin: 20px 0;
+}
+
+nav a {
+  display: inline-block;
+  padding: 8px 20px;
+  background-color: #000000;
+  color: #ffd700;
+  text-decoration: none;
+  border: 1px solid #ffd700;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+nav a:hover {
+  background-color: #ffd700;
+  color: #000000;
+}

@@ -1,0 +1,71 @@
+body {
+  font-family: Arial;
+  padding: 20px;
+  background: #f0f0f0; /* Light gray background */
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+th {
+  background-color: #000000; /* Black */
+  color: #ffd700; /* Gold */
+}
+form {
+  display: inline;
+}
+.actions {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+h2 {
+  color: #ffd700; /* Gold */
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+.message {
+  background-color: rgba(255, 215, 0, 0.2); /* Light gold background */
+  color: #000000; /* Black text */
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ffd700; /* Gold border */
+  border-radius: 5px;
+}
+.error {
+  background-color: rgba(0, 0, 0, 0.1); /* Light black/gray background */
+  color: #000000; /* Black text */
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #000000; /* Black border */
+  border-radius: 5px;
+}
+
+/* Navigation Styles */
+nav {
+  text-align: center;
+  margin: 20px 0;
+}
+
+nav a {
+  display: inline-block;
+  padding: 8px 20px;
+  background-color: #000000;
+  color: #ffd700;
+  text-decoration: none;
+  border: 1px solid #ffd700;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+nav a:hover {
+  background-color: #ffd700;
+  color: #000000;
+}

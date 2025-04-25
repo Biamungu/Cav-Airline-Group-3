@@ -50,7 +50,7 @@ session_start();
                 </div>
             </div>
             <div class="dropdown">
-                <a href="Support.php" class="dropbtn">Help</a>
+                <a href="Support.php" class="dropbtn">Contact Us</a>
             </div>
 
             <!-- This is the only login/logout section you need -->
@@ -586,7 +586,7 @@ session_start();
 
     <footer>
         <p>&copy; 2025 Cav Airlines, @Harare along magamba way 5ive Ave. All rights reserved.</p>
-        <p>Contact: <a href="mailto:mandeyatendai@gmail.com">mandeyatendai@gmail.com</a> | Phone: +260972109894</p>
+        <p>Contact: <a href="mailto:mandeyatendai@gmail.com">group3@gmail.com</a> | Phone: +260776669320</p>
 
         <div class="chatbot-icon">
             <i class="fas fa-comments"></i>
