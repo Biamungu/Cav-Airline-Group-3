@@ -208,7 +208,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
                 </div>
             <?php endif; ?>
 
-            <form class="booking-form hotels-form" method="POST">
+            <!-- <form class="booking-form hotels-form" method="POST">
                 <input type="hidden" name="bookingType" value="hotels">
                 <div class="form-grid">
                     <div class="form-group">
@@ -398,7 +398,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
                         Search Cars
                     </button>
                 </div>
-            </form>
+            </form>--->
         </div>
     </section>
 
