@@ -402,7 +402,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['bookingType']) && $_PO
         </div>
     </section>
 
-    <section class="featured-flights">
+    <!---<section class="featured-flights">
         <h2>Featured Flight Destinations</h2>
         <div class="flight-cards">
             <div class="flight-card">
