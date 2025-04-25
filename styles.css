@@ -1154,46 +1154,45 @@ p {
 .great-value-fares {
   background: rgba(0, 0, 0, 0.7);
   padding: 40px 20px;
-  margin: 40px;
+  margin: 20px 0;
   border-radius: 20px;
-  justify-content: center;
 }
 
 .great-value-fares h2 {
   color: #ffd700;
   text-align: center;
-
   font-size: 2em;
   margin-bottom: 30px;
-  padding-left: 20px;
 }
 
 .fares-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 10px;
 }
 
 .fare-card {
   position: relative;
   border-radius: 10px;
   overflow: hidden;
-  /* background: white; */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  aspect-ratio: 1/1.2; /* Maintain consistent card proportions */
 }
 
 .fare-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .fare-card img {
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 .fare-content {
@@ -1201,8 +1200,8 @@ p {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 20px;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  padding: 15px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
   color: white;
 }
 
@@ -1213,14 +1212,16 @@ p {
 }
 
 .fare-content .destination {
-  font-size: 1.5em;
-  margin-bottom: 10px;
+  font-size: 1.3em;
+  margin-bottom: 8px;
+  line-height: 1.2;
 }
 
 .fare-content .price {
-  font-size: 1.8em;
+  font-size: 1.5em;
   font-weight: bold;
   margin-bottom: 10px;
+  color: #ffd700;
 }
 
 .book-now-btn {
@@ -1231,11 +1232,79 @@ p {
   border-radius: 30px;
   cursor: pointer;
   font-weight: bold;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
+  width: 100%;
+  max-width: 150px;
+  display: block;
+  margin: 0 auto;
 }
 
 .book-now-btn:hover {
   background: #f0c800;
+  transform: scale(1.05);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .fares-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .great-value-fares {
+    padding: 30px 15px;
+    margin: 15px 0;
+  }
+
+  .great-value-fares h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+
+  .fare-content .destination {
+    font-size: 1.2em;
+  }
+
+  .fare-content .price {
+    font-size: 1.4em;
+  }
+}
+
+@media (max-width: 576px) {
+  .fares-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+
+  .fare-card {
+    aspect-ratio: 1/1.1;
+  }
+
+  .great-value-fares h2 {
+    font-size: 1.6em;
+  }
+
+  .book-now-btn {
+    padding: 10px 20px;
+    max-width: 100%;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 400px) {
+  .fare-content {
+    padding: 12px;
+  }
+
+  .fare-content .destination {
+    font-size: 1.1em;
+  }
+
+  .fare-content .price {
+    font-size: 1.3em;
+  }
 }
 
 .service-cards {

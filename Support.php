@@ -75,13 +75,6 @@ $conn->close();
             </div>
         </div>
 
-
-        <div class ="button_log">
-            <button class="button_l">
-                    <a href="Login.php">Login</a>
-            </button>
-        </div>
-
     </nav>
 </header>
 

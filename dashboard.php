@@ -18,14 +18,24 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Modified query to filter by logged-in user
+// Get user's name
+$user_sql = "SELECT first_name, last_name FROM users WHERE user_id = ?";
+$user_stmt = $conn->prepare($user_sql);
+$user_stmt->bind_param("i", $user_id);
+$user_stmt->execute();
+$user_result = $user_stmt->get_result();
+$user = $user_result->fetch_assoc();
+$user_name = htmlspecialchars($user['first_name'] . ' ' . $user['last_name']);
+$user_stmt->close();
+
+// Get bookings
 $sql = "SELECT booking_id, user_id, booking_date, total_amount, payment_status, booking_status 
         FROM bookings 
         WHERE user_id = ?
         ORDER BY booking_date DESC";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $user_id); // "i" for integer type
+$stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
@@ -36,66 +46,35 @@ $result = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <title>My Bookings</title>
+    <link rel="stylesheet" href="dashboard.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f0f4f8;
-            padding: 30px;
-        }
-
-        h1 {
+        /* Additional styles for this page */
+        .user-greeting {
             text-align: center;
-            color: #007bff;
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-size: 1.2em;
         }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 25px;
-        }
-
-        th,
-        td {
-            padding: 12px;
+        
+        nav {
             text-align: center;
-            border-bottom: 1px solid #ccc;
+            margin: 20px 0;
         }
-
-        th {
-            background-color: #007bff;
-            color: white;
+        
+        nav a {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: #000000;
+            color: #ffd700;
+            text-decoration: none;
+            border: 1px solid #ffd700;
+            border-radius: 4px;
+            transition: all 0.3s ease;
         }
-
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        .status-confirmed {
-            color: green;
-        }
-
-        .status-cancelled {
-            color: red;
-        }
-
-        .status-completed {
-            color: blue;
-        }
-
-        .payment-paid {
-            color: green;
-        }
-
-        .payment-pending {
-            color: orange;
-        }
-
-        .payment-refunded {
-            color: red;
-        }
-
-        .payment-cancelled {
-            color: gray;
+        
+        nav a:hover {
+            background-color: #ffd700;
+            color: #000000;
         }
     </style>
 </head>
@@ -103,12 +82,20 @@ $result = $stmt->get_result();
 <body>
 
     <h1>My Flight Bookings</h1>
+    
+    <div class="user-greeting">
+        Welcome, <?php echo $user_name; ?>
+    </div>
+    
+    <nav>
+        <a href="index.php">Back to Home</a>
+    </nav>
 
     <?php if ($result->num_rows > 0): ?>
         <table>
             <tr>
                 <th>Booking ID</th>
-                <th>User ID</th>
+                <th>Passenger Name</th>
                 <th>Date</th>
                 <th>Total Amount ($)</th>
                 <th>Payment Status</th>
@@ -117,7 +104,7 @@ $result = $stmt->get_result();
             <?php while ($row = $result->fetch_assoc()): ?>
                 <tr>
                     <td><?= htmlspecialchars($row['booking_id']) ?></td>
-                    <td><?= htmlspecialchars($row['user_id']) ?></td>
+                    <td><?= $user_name ?></td>
                     <td><?= htmlspecialchars($row['booking_date']) ?></td>
                     <td><?= number_format($row['total_amount'], 2) ?></td>
                     <td class="payment-<?= strtolower(htmlspecialchars($row['payment_status'])) ?>">
